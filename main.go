@@ -6,30 +6,32 @@ import (
 )
 
 func main() {
-	var wordList []string
-	var cleanText string
-	input := "Hola mundo, hola Go! Mundo de Go"
-	replacer := strings.NewReplacer(",", "", "!", "")
-	cleanText = replacer.Replace(input)
-	//for _, v := range input {
-	//	//fmt.Println(string(v))
-	//	word := string(v)
-	//	if strings.ContainsAny(word, ",.!?;:") {
-	//		cleanText = strings.Replace(input, string(v), "", -1)
-	//		continue
-	//	}
-	//}
+	text := "Hola mundo, hola Go! Mundo de Go"
+	result := wordFrequency(text)
+	for k, v := range result {
+		fmt.Println(k, v)
+	}
+}
 
-	lower := strings.ToLower(cleanText)
-	wordList = strings.Fields(lower)
+func wordFrequency(txt string) map[string]int {
 	result := make(map[string]int)
+	lower := strings.ToLower(txt)
+	runes := []rune(lower)
+
+	//i = indice y r = rune
+	for i, r := range runes {
+
+		if !('a' <= r && r <= 'z') {
+			runes[i] = ' '
+			continue
+		}
+
+	}
+	wordList := strings.Fields(string(runes))
 
 	for _, word := range wordList {
 		result[word]++
-		continue
 	}
 
-	for key, value := range result {
-		fmt.Println(key, value)
-	}
+	return result
 }
